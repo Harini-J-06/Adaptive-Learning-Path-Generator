@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assessment | Learning Path</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Learning Assessment</h2>
+
+        <form action="/assessment" method="POST">
+
+            <!-- Learning Goal -->
+            <div class="section">
+                <label>Select your learning goal</label>
+                    <select name="goal" required>
+                    <option value="">-- Choose a goal --</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Python Programming">Python Programming</option>
+                    </select>
+            </div>
+
+            <!-- Skill Level -->
+            <div class="section">
+                <label>Your current skill level</label>
+                <select name="skill_level" required>
+                    <option value="">-- Choose level --</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                </select>
+            </div>
+
+            <!-- Study Hours -->
+            <div class="section">
+                <label>Study hours per week</label>
+                <input type="number" min="1" max="40" placeholder="10" name="study_hours" required>
+            </div>
+            <button type="submit">Generate Learning Path</button>
+        </form>
+    </div>
+</body>
+</html>

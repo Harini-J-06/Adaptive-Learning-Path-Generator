@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learn Module</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      color: #2b2b2b;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* Video section */
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      margin-bottom: 22px;
+    }
+
+    .video-box {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-box iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .btn {
+      margin-top: 16px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      opacity: 0.95;
+    }
+
+    .btn:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+
+    /* Practice section */
+    .question {
+      margin-bottom: 16px;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      margin-top: 18px;
+      background: #2c80b4;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.95;
+    }
+
+    .footer-nav {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      color: #4f46e5;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function markCompleted(){
+    const btn = document.getElementById("completeBtn");
+
+    btn.innerText = "Completed ✓";
+    btn.style.backgroundColor = "gray";
+    btn.disabled = true;
+    }
+  </script>
+  <div class="container">
+
+    <h1>{{module.title}}</h1>
+    {% if module.description %}
+    <p>{{module.description}}</p>
+    {% endif %}
+    <div class="subtitle">Watch the lesson and complete the practice questions</div>
+
+    <!-- Video Section -->
+    <div class="card">
+      <h2>📺 Video Lesson</h2>
+      {% if module.video_url %}
+      <div class="video-box">
+        <iframe src="{{module.video_url}}" allowfullscreen></iframe>
+      </div>
+      {% else %}
+      <p>No video available</p>
+      {% endif %}
+      {% if is_completed %}
+      <button class="btn" disabled>Completed</button>
+      {% else %}
+      <form action="{{url_for('complete_module', module_id=module.id)}}" method="POST">
+        <button type="submit" class="btn" onclick="this.innerText='Completed ✓'; this.style.backgroundColor='gray'; this.disabled=true;">Mark as completed</button>
+      </form>
+      {% endif %}
+      <p><a href="{{url_for('learning_path')}}">Back to Learning Path</a></p>
+    </div>
+    <!-- Practice Section -->
+    <div class="card">
+      <h2>📝 Practice Questions</h2>
+      {% if practice %}
+        <div style="padding:10px;margin-bottom:12px;border-radius:6px;background:#f3f7fb;">
+          <strong>{{ practice.message }}</strong>
+          {% if practice.passed %}
+            <div style="color:green;">Module marked completed ✅</div>
+          {% else %}
+            <div style="color:#b45309;">You did not pass yet. Try again!</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if module.questions and module.questions|length>0 %}
+      <form action="{{url_for('submit_practice', module_id=module.id)}}" method="post">
+        {% for q in module.questions %}
+          <div class="question">
+            <p>{{ loop.index }}.{{ q.text }}</p>
+            {% set question_number=loop.index %}
+           {% for key, text in q.options.items() %}
+             <label style="display: block; margin-bottom: 6px;">
+               <input type="radio" name="q{{ question_number }}" value="{{ key }}" required>
+                {{ key }}.{{ text }}
+              </label><br>
+           {% endfor %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="submit-btn">Submit Practice</button>
+      </form>
+      {% else %}
+        <p>No practice set for this module.</p>
+      {% endif %}
+    </div>
+    <!-- Navigation -->
+    <div class="footer-nav">
+      <a href="{{url_for('progress')}}">⬅ Back to Progress</a>
+    </div>
+  </div>
+</body>
+</html>

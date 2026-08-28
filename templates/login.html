@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Adaptive Learning Path</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 40px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        .forgot{
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        .forgot a{
+            font-size: 13px;
+            text-decoration: none;
+            color: #4facfe;
+            font-weight: bold;
+        }
+        .forgot a:hover{
+            text-decoration: underline;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background: #4facfe;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background: #3a8dde;
+        }
+
+        .extra-links {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .extra-links a {
+            text-decoration: none;
+            color: #4facfe;
+            font-weight: bold;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <form method="POST" action="/login">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+            <div class="forgot">
+                <a href="/forgot_password">Forgot password?</a>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="extra-links">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

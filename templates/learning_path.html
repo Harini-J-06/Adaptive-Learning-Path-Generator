@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Learning Path</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .summary {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        .summary p {
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        .module {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 6px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .module h3 {
+            margin: 0;
+            color: #3498db;
+        }
+
+        .module p {
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .btn {
+            display: block;
+            width: 220px;
+            margin: 40px auto;
+            padding: 12px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #2c80b4;
+        }
+
+        .start-btn{
+            padding:10px 18px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .start-btn:hover{
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Your Personalized Learning Path</h1>
+    <div class="summary">
+        <p><strong>Learning Goal:</strong> {{ goal }}</p>
+        <p><strong>Current Level:</strong> {{ skill_level }}</p>
+        <p><strong>Study Time:</strong> {{ study_hours }} hours per week</p>
+    </div>
+    <!-- Learning Modules -->
+     {% if modules %}
+     {% for module in modules %}
+    <div class="module">
+        <h3>Week {{module['module_id']}}: {{module['title']}}</h3>
+        <p>Estimated time:{{module['hours']}} hours</p>
+        {% if module['description'] %}
+        <p>{{ module['description'] }}</p>
+        {% endif %}
+    <!--Status-->
+    {% set mid= module['module_id'] %}
+    {% if mid in completed_modules %}
+    <p style="color: green; font-weight: bold;">Completed</p>
+    {% elif mid==1 or (mid-1) in completed_modules %}
+    <a href="{{url_for('learn_module', module_id=mid)}}" class="start-btn">Start Learning</a>
+    {% else %}
+    <button disabled style="background: #ccc; cursor: not-allowed;">Locked</button>
+    {% endif %}
+</div>
+{% endfor %}
+{% else %}
+<p>No modules found. Please complete assessment first.</p>
+{% endif %}
+</div>
+<a href="{{url_for('progress')}}" class="btn">View Progress</a>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin — Users & Progress</title>
+  <style>
+    body{
+      font-family:Arial;
+      padding:18px; 
+      background:#fafafa;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .topbar form{
+      margin:0;
+    }
+    input[type="search"]{
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      width:260px;
+    }
+    button.search-btn{
+      padding:8px 12px;
+      border-radius:6px;
+      border:none;
+      background:#2563eb;
+      color:#fff;
+      cursor:pointer;
+    }
+    table{
+      border-collapse:collapse; 
+      width:100%; background:#fff; 
+      box-shadow:0 6px 12px rgba(0,0,0,0.04);
+    }
+    th, td{
+      border:1px solid #eee; 
+      padding:10px; 
+      text-align:left; 
+      font-size:14px;
+    }
+    th{
+      background:#f3f4f6; 
+      font-weight:700;
+    }
+    .percent{
+      font-weight:700;
+    }
+    a.btn {
+      display:inline-block; 
+      padding:8px 12px; 
+      background:#4f46e5; 
+      color:#fff; 
+      border-radius:6px; 
+      text-decoration:none;
+    }
+    .small-muted{
+      color:#666; 
+      font-size:13px;
+    }
+    .center{
+      margin-top:14px;
+    }
+    .count{
+      font-size:13px;
+      color:#333;
+      margin-left:8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Admin — Users & Progress</h1>
+
+  <div class="topbar">
+    <a class="btn" href="{{ url_for('home') }}">← Back to Home</a>
+
+    <!-- Search form (GET) -->
+    <form action="{{ url_for('admin_dashboard') }}" method="get" style="display:inline-block;">
+      <input type="search" name="q" placeholder="Search username, email or goal" value="{{ q|default('') }}" />
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+      <a class="btn" href="{{ url_for('admin_export_csv', q=q) }}">Export CSV</a>
+      <div class="small-muted">Rows: <span class="count">{{ rows|length }}</span></div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Selected Goal</th>
+        <th>Completed Modules</th>
+        <th>Total Modules</th>
+        <th>Progress (%)</th>
+        <th>Average Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if rows %}
+        {% for r in rows %}
+        <tr>
+          <td>{{ r['user_id'] }}</td>
+          <td>{{ r['username'] }}</td>
+          <td>{{ r['email'] }}</td>
+          <td>{{ r['goal'] }}</td>
+          <td>{{ r['completed_count'] }}</td>
+          <td>{{ r['total_modules'] }}</td>
+          <td class="percent">{{ r['progress_percent'] }}%</td>
+          <td>{{ r['avg_score'] }}%</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="8" style="text-align:center; padding:16px;">No users found.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+  <div class="center">
+    <p class="small-muted">Use the search box to filter by username, email, or selected goal. Export respects the search filter.</p>
+  </div>
+</body>
+</html>

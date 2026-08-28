@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaptive Learning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2933;
+        }
+
+        /* ---------- NAVBAR ---------- */
+        header {
+            background: #ffffff;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        nav a {
+            margin-left: 22px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        nav a.primary {
+            background: #2563eb;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            padding: 80px 80px 60px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons button {
+            padding: 14px 26px;
+            border-radius: 8px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
+
+        /* ---------- OVERVIEW CARD ---------- */
+        .overview {
+            background: white;
+            padding: 26px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .overview h3 {
+            margin-bottom: 14px;
+        }
+
+        .overview ul {
+            margin-top: 10px;
+            padding-left: 18px;
+        }
+
+        .overview li {
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        /* ---------- FEATURES ---------- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+            padding: 40px 80px 80px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 26px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+        }
+
+        .feature-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media(max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 50px 30px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                padding: 20px 30px 60px;
+            }
+        }
+        footer{
+            margin-top: 80px;
+            padding: 15px;
+            background-color: #2563eb;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Adaptive Learning</div>
+    <nav>
+        <a href="/assessment">Assessment</a>
+        <a href="/learning_path">Path</a>
+        <a href="/progress">Progress</a>
+        <a href="/login" class="primary">Login</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>Personalized learning, guided by clear rules.</h1>
+        <p>
+            Get a step-by-step learning plan tailored to your skill level,
+            learning goal, and available time. One simple assessment builds
+            your focused learning path.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/signup"><button class="btn-primary">Start Learning</button></a>
+        </div>
+    </div>
+
+    <div class="overview">
+        <h3>Quick Overview</h3>
+        <p>Beginner · 10 hrs/week · Web Development</p>
+
+        <ul>
+            <li>HTML Fundamentals</li>
+            <li>CSS Basics</li>
+            <li>JavaScript Introduction</li>
+        </ul>
+    </div>
+</section>
+<h1><center>FEATURES</center></h1>
+<section class="features">
+    <div class="feature-card">
+        <h4>Simple Assessment</h4>
+        <p>
+            A short form collects your goal, skill level, and available
+            time to generate a tailored learning path.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h4>Structured Modules</h4>
+        <p>
+            Each module includes a lesson and practice task with
+            progress tracking.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h4>Progress Tracking</h4>
+        <p>
+            Track completed modules and practice scores
+            from your dashboard.
+        </p>
+    </div>
+</section>
+<center><a href="/admin">Admin Dashboard</a></center>
+<footer class="footer">
+    <center><p>© 2026 Adaptive Learning Path Generator</p></center>
+</footer>
+</body>
+</html>
